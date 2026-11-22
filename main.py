@@ -27,7 +27,11 @@ def main() -> None:
     if not TEXT.strip():
         raise SystemExit("entry text is only whitespace")
 
-    output_dir = os.environ.get("OUTPUT_DIR", "/output")
+    output_dir = (
+        os.environ.get("MAKEFUN_OUTPUT_DIR")
+        or os.environ.get("OUTPUT_DIR")
+        or "/output"
+    )
     os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, "entry.txt")
     with open(output_path, "w", encoding="utf-8", newline="\n") as handle:
